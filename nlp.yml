@@ -1,0 +1,12 @@
+name: nlp
+channels:
+- conda-forge
+- defaults
+dependencies:
+- nltk
+- spacy
+- textacy
+- pip:
+  - smart-open==1.5.7
+
+
