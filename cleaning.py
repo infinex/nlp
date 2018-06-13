@@ -15,7 +15,7 @@ __author__
 
 from nltk.stem import WordNetLemmatizer
 
-def stem_tokens(tokens, stemmer):
+def `(tokens, stemmer):
     """
         Args:
             tokens (list)
