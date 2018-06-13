@@ -13,17 +13,26 @@ __author__
 
 """
 
-from nltk.stem import WordNetLemmatizer
+from nltk.stem import WordNetLemmatizer,PorterStemmer
 
-def stem_tokens(tokens, stemmer):
+st = PorterStemmer()
+
+def stem_tokens(tokens, stemmer=st):
     """
 
         Args:
-            tokens (list)
-            stemmer (nltk stemmer)
+            tokens (list) :
+            stemmer (nltk stemmer) : nltk.stem.PorterStemmer()
 
         Returns:
             list: stem tokens
+
+        Examples:
+
+        import nltk
+        english_stemmer = nltk.stem.PorterStemmer()
+        stem_tokens(['apples'],english_stemmer)
+        #['appl']
     """
 
     stemmed = []
@@ -32,10 +41,10 @@ def stem_tokens(tokens, stemmer):
     return stemmed
 
 
-st = WordNetLemmatizer()
+wl = WordNetLemmatizer()
 
 def lement_tokens(tokens):
     stemmed = []
     for token in tokens:
-        stemmed.append(st.lemmatize(token))
+        stemmed.append(wl.lemmatize(token))
     return stemmed
