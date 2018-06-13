@@ -2,10 +2,13 @@ name: nlp
 channels:
 - conda-forge
 - defaults
+- anaconda
 dependencies:
 - nltk
 - spacy
 - textacy
+- regex
+- beautifulsoup4
 - pip:
   - smart-open==1.5.7
 

@@ -45,7 +45,7 @@ conda env create -f <environment-name>.yml
 
 Update an existing enviroment
 ```
-conda env update -f <environment-name>..yml
+conda env update -f <environment-name>.yml
 ```
 
 
