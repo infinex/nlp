@@ -14,15 +14,18 @@ __author__
 
 """
 
-from nltk.stem import WordNetLemmatizer,PorterStemmer
+from nltk.stem import WordNetLemmatizer, PorterStemmer
 import multiprocessing
 import nltk
 from bs4 import BeautifulSoup
 import nltk
 import regex
 import csv
+import constants_colors
 
 st = PorterStemmer()
+
+
 def stem_tokens(tokens, stemmer=st):
     """
 
@@ -49,6 +52,7 @@ def stem_tokens(tokens, stemmer=st):
 
 wl = WordNetLemmatizer()
 
+
 def lement_tokens(tokens):
     stemmed = []
     for token in tokens:
@@ -56,12 +60,15 @@ def lement_tokens(tokens):
     return stemmed
 
 
-#--------------------------- Processor ---------------------------
-## base class
-## Most of the processings can be casted into the "pattern-replace" framework
+"""
+--------------------------- Processor ---------------------------
+base class
+Most of the processings can be casted into the "pattern-replace" framework
+"""
 class BaseReplacer:
     def __init__(self, pattern_replace_pair_list=[]):
         self.pattern_replace_pair_list = pattern_replace_pair_list
+
     def transform(self, text):
         for pattern, replace in self.pattern_replace_pair_list:
             try:
@@ -71,11 +78,12 @@ class BaseReplacer:
         return regex.sub(r"\s+", " ", text).strip()
 
 
-## deal with case
+"""deal with case"""
 class LowerCaseConverter(BaseReplacer):
     """
     Traditional -> traditional
     """
+
     def transform(self, text):
         return text.lower()
 
@@ -94,6 +102,7 @@ class LowerUpperCaseSplitter(BaseReplacer):
     Reference:
     https://www.kaggle.com/c/home-depot-product-search-relevance/forums/t/18472/typos-in-the-product-descriptions
     """
+
     def __init__(self):
         self.pattern_replace_pair_list = [
             (r"(\w)[\.?!]([A-Z])", r"\1 \2"),
@@ -101,7 +110,7 @@ class LowerUpperCaseSplitter(BaseReplacer):
         ]
 
 
-## deal with word replacement
+""" deal with word replacement"""
 # 1st solution in CrowdFlower
 class WordReplacer(BaseReplacer):
     def __init__(self, replace_fname):
@@ -111,15 +120,15 @@ class WordReplacer(BaseReplacer):
             if len(line) == 1 and line[0].startswith("#"):
                 continue
             try:
-                pattern = r"(?<=\W|^)%s(?=\W|$)"%line[0]
+                pattern = r"(?<=\W|^)%s(?=\W|$)" % line[0]
                 replace = line[1]
-                self.pattern_replace_pair_list.append( (pattern, replace) )
+                self.pattern_replace_pair_list.append((pattern, replace))
             except:
                 print(line)
                 pass
 
 
-## deal with letters
+""" deal with letters"""
 class LetterLetterSplitter(BaseReplacer):
     """
     For letter and letter
@@ -134,13 +143,14 @@ class LetterLetterSplitter(BaseReplacer):
     -:
     1-1/4 -> 1-1/4
     """
+
     def __init__(self):
         self.pattern_replace_pair_list = [
             (r"([a-zA-Z]+)[/\-]([a-zA-Z]+)", r"\1 \2"),
         ]
 
 
-## deal with digits and numbers
+""" deal with digits and numbers"""
 class DigitLetterSplitter(BaseReplacer):
     """
     x:
@@ -153,6 +163,7 @@ class DigitLetterSplitter(BaseReplacer):
     includes a tile flange to further simplify installation.60 in. L x 36 in. W x 20 in. ->
     includes a tile flange to further simplify installation. 60 in. L x 36 in. W x 20 in.
     """
+
     def __init__(self):
         self.pattern_replace_pair_list = [
             (r"(\d+)[\.\-]*([a-zA-Z]+)", r"\1 \2"),
@@ -164,6 +175,7 @@ class DigitCommaDigitMerger(BaseReplacer):
     """
     1,000,000 -> 1000000
     """
+
     def __init__(self):
         self.pattern_replace_pair_list = [
             (r"(?<=\d+),(?=000)", r""),
@@ -175,6 +187,7 @@ class NumberDigitMapper(BaseReplacer):
     one -> 1
     two -> 2
     """
+
     def __init__(self):
         numbers = [
             "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
@@ -186,16 +199,17 @@ class NumberDigitMapper(BaseReplacer):
             16, 17, 18, 19, 20, 30, 40, 50, 60, 70, 80, 90
         ]
         self.pattern_replace_pair_list = [
-            (r"(?<=\W|^)%s(?=\W|$)"%n, str(d)) for n,d in zip(numbers, digits)
+            (r"(?<=\W|^)%s(?=\W|$)" % n, str(d)) for n, d in zip(numbers, digits)
         ]
 
 
-## deal with unit
+""" deal with unit"""
 class UnitConverter(BaseReplacer):
     """
     shadeMature height: 36 in. - 48 in.Mature width
     PUT one UnitConverter before LowerUpperCaseSplitter
     """
+
     def __init__(self):
         self.pattern_replace_pair_list = [
             (r"([0-9]+)( *)(inches|inch|in|in.|')\.?", r"\1 in. "),
@@ -216,12 +230,14 @@ class UnitConverter(BaseReplacer):
             (r"([0-9]+)( *)(amperes|ampere|amps|amp)\.?", r"\1 amp. "),
             (r"([0-9]+)( *)(qquart|quart)\.?", r"\1 qt. "),
             (r"([0-9]+)( *)(hours|hour|hrs.)\.?", r"\1 hr "),
-            (r"([0-9]+)( *)(gallons per minute|gallon per minute|gal per minute|gallons/min.|gallons/min)\.?", r"\1 gal. per min. "),
-            (r"([0-9]+)( *)(gallons per hour|gallon per hour|gal per hour|gallons/hour|gallons/hr)\.?", r"\1 gal. per hr "),
+            (r"([0-9]+)( *)(gallons per minute|gallon per minute|gal per minute|gallons/min.|gallons/min)\.?",
+             r"\1 gal. per min. "),
+            (r"([0-9]+)( *)(gallons per hour|gallon per hour|gal per hour|gallons/hour|gallons/hr)\.?",
+             r"\1 gal. per hr "),
         ]
 
 
-## deal with html tags
+""" deal with html tags"""
 class HtmlCleaner:
     def __init__(self, parser):
         self.parser = parser
@@ -232,8 +248,8 @@ class HtmlCleaner:
         return text
 
 
-## deal with some special characters
-# 3rd solution in CrowdFlower (cleanData_02.R)
+""" deal with some special characters"""
+
 class QuartetCleaner(BaseReplacer):
     def __init__(self):
         self.pattern_replace_pair_list = [
@@ -255,8 +271,8 @@ class QuartetCleaner(BaseReplacer):
         ]
 
 
-## lemmatizing for using pretrained word2vec model
-# 2nd solution in CrowdFlower
+""" lemmatizing for using pretrained word2vec model"""
+
 class Lemmatizer:
     def __init__(self):
         self.Tokenizer = nltk.tokenize.TreebankWordTokenizer()
@@ -267,7 +283,7 @@ class Lemmatizer:
         return " ".join(tokens)
 
 
-## stemming
+""" stemming"""
 class Stemmer:
     def __init__(self, stemmer_type="snowball"):
         self.stemmer_type = stemmer_type
@@ -281,7 +297,7 @@ class Stemmer:
         return " ".join(tokens)
 
 
-#----------------------- Processor Wrapper -----------------------
+# ----------------------- Processor Wrapper -----------------------
 class ProcessorWrapper:
     def __init__(self, processor):
         self.processor = processor
@@ -294,19 +310,20 @@ class ProcessorWrapper:
         elif isinstance(input, list):
             # take care when the input is a list
             # currently for a list of attributes
-            out = [0]*len(input)
+            out = [0] * len(input)
             for i in range(len(input)):
                 out[i] = ProcessorWrapper(self.processor).transform(input[i])
         else:
-            raise(ValueError("Currently not support type: %s"%type(input).__name__))
+            raise (ValueError("Currently not support type: %s" % type(input).__name__))
         return out
 
 
-#------------------- List/DataFrame Processor Wrapper -------------------
+# ------------------- List/DataFrame Processor Wrapper -------------------
 class ListProcessor:
     """
     WARNING: This class will operate on the original input list itself
     """
+
     def __init__(self, processors):
         self.processors = processors
 
@@ -321,6 +338,7 @@ class DataFrameProcessor:
     """
     WARNING: This class will operate on the original input dataframe itself
     """
+
     def __init__(self, processors):
         self.processors = processors
 
@@ -335,6 +353,7 @@ class DataFrameParallelProcessor:
     WARNING: This class will operate on the original input dataframe itself
     https://stackoverflow.com/questions/26520781/multiprocessing-pool-whats-the-difference-between-map-async-and-imap
     """
+
     def __init__(self, processors, n_jobs=4):
         self.processors = processors
         self.n_jobs = n_jobs
@@ -343,14 +362,14 @@ class DataFrameParallelProcessor:
         df_processor = DataFrameProcessor(self.processors)
         p = multiprocessing.Pool(self.n_jobs)
         dfs = p.imap(df_processor.process, [dfAll[col] for col in columns])
-        for col,df in zip(columns, dfs):
+        for col, df in zip(columns, dfs):
             dfAll[col] = df
         return dfAll
 
-COLOR_LIST=['red','green']
+
+COLOR_LIST = [x.lower() for x in constants_colors.COLOR_TO_HEX_DICT.keys()]
 COLORS_PATTERN = r"(?<=\W|^)%s(?=\W|$)" % ("|".join(COLOR_LIST))
 UNITS = [" ".join(r.strip().split(" ")[1:]) for p, r in UnitConverter().pattern_replace_pair_list]
 UNITS_PATTERN = r"(?:\d+[?:.,]?\d*)(?: %s\.*)?" % ("|".join(UNITS))
 DIM_PATTERN_NxNxN = r"%s ?x %s ?x %s" % (UNITS_PATTERN, UNITS_PATTERN, UNITS_PATTERN)
 DIM_PATTERN_NxN = r"%s ?x %s" % (UNITS_PATTERN, UNITS_PATTERN)
-

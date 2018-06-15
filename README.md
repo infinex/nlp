@@ -15,6 +15,7 @@ This is a series of file collection to assist in nlp preprocssing
 ## 2. Preprocessing
 
 [ngram.py](ngram.py) : Function to compute n-gram & n-term
+[cleaning.py](cleaning.py) : Function to clean a typical text file.
 
 
 ## 3. Text Statistics
