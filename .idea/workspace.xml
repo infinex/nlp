@@ -35,10 +35,10 @@
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="345">
-                <caret line="20" selection-start-line="20" selection-end-line="20" />
-                <caret line="21" selection-start-line="21" selection-end-line="21" />
-                <caret line="22" selection-start-line="22" selection-end-line="22" />
-                <caret line="23" selection-start-line="23" selection-end-line="23" />
+                <caret line="20" column="60" selection-start-line="20" selection-start-column="60" selection-end-line="20" selection-end-column="60" />
+                <caret line="21" column="68" selection-start-line="21" selection-start-column="68" selection-end-line="21" selection-end-column="68" />
+                <caret line="22" column="92" selection-start-line="22" selection-start-column="92" selection-end-line="22" selection-end-column="92" />
+                <caret line="23" column="72" selection-start-line="23" selection-start-column="72" selection-end-line="23" selection-end-column="72" />
               </first_editor>
               <second_editor>
                 <js_state />
@@ -430,7 +430,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529042969562</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="updated readme">
+      <created>1529043022800</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1529043022800</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TodoView">
@@ -685,10 +692,10 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="345">
-            <caret line="20" selection-start-line="20" selection-end-line="20" />
-            <caret line="21" selection-start-line="21" selection-end-line="21" />
-            <caret line="22" selection-start-line="22" selection-end-line="22" />
-            <caret line="23" selection-start-line="23" selection-end-line="23" />
+            <caret line="20" column="60" selection-start-line="20" selection-start-column="60" selection-end-line="20" selection-end-column="60" />
+            <caret line="21" column="68" selection-start-line="21" selection-start-column="68" selection-end-line="21" selection-end-column="68" />
+            <caret line="22" column="92" selection-start-line="22" selection-start-column="92" selection-end-line="22" selection-end-column="92" />
+            <caret line="23" column="72" selection-start-line="23" selection-start-column="72" selection-end-line="23" selection-end-column="72" />
           </first_editor>
           <second_editor>
             <js_state />
