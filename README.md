@@ -14,14 +14,11 @@ This is a series of file collection to assist in nlp preprocssing
 
 ## 2. Preprocessing
 
-apple
-orange
-pear
 
-[ngram.py](ngram.py) : Function to compute n-gram & n-term
-[cleaning.py](cleaning.py) : Function to clean a typical text file
-[constants_colors.py](constants_colors.py) : Constant for color conversion and color names
-[constants_regex.py](constants_regex.py) : Constants for helpful regex
+[ngram.py](ngram.py) : Function to compute n-gram & n-term<br>
+[cleaning.py](cleaning.py) : Function to clean a typical text file<br>
+[constants_colors.py](constants_colors.py) : Constant for color conversion and color names<br>
+[constants_regex.py](constants_regex.py) : Constants for helpful regex<br>
 
 ## 3. Text Statistics
 
