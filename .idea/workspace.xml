@@ -34,8 +34,11 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="240">
-                <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+              <first_editor relative-caret-position="345">
+                <caret line="20" selection-start-line="20" selection-end-line="20" />
+                <caret line="21" selection-start-line="21" selection-end-line="21" />
+                <caret line="22" selection-start-line="22" selection-end-line="22" />
+                <caret line="23" selection-start-line="23" selection-end-line="23" />
               </first_editor>
               <second_editor>
                 <js_state />
@@ -406,7 +409,28 @@
       <option name="project" value="LOCAL" />
       <updated>1529042902319</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="updated readme">
+      <created>1529042922406</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1529042922406</updated>
+    </task>
+    <task id="LOCAL-00015" summary="updated readme">
+      <created>1529042944767</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1529042944767</updated>
+    </task>
+    <task id="LOCAL-00016" summary="updated readme">
+      <created>1529042969562</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1529042969562</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TodoView">
@@ -660,8 +684,11 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="240">
-            <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+          <first_editor relative-caret-position="345">
+            <caret line="20" selection-start-line="20" selection-end-line="20" />
+            <caret line="21" selection-start-line="21" selection-end-line="21" />
+            <caret line="22" selection-start-line="22" selection-end-line="22" />
+            <caret line="23" selection-start-line="23" selection-end-line="23" />
           </first_editor>
           <second_editor>
             <js_state />
