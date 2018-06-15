@@ -347,4 +347,10 @@ class DataFrameParallelProcessor:
             dfAll[col] = df
         return dfAll
 
+COLOR_LIST=['red','green']
+COLORS_PATTERN = r"(?<=\W|^)%s(?=\W|$)" % ("|".join(COLOR_LIST))
+UNITS = [" ".join(r.strip().split(" ")[1:]) for p, r in UnitConverter().pattern_replace_pair_list]
+UNITS_PATTERN = r"(?:\d+[?:.,]?\d*)(?: %s\.*)?" % ("|".join(UNITS))
+DIM_PATTERN_NxNxN = r"%s ?x %s ?x %s" % (UNITS_PATTERN, UNITS_PATTERN, UNITS_PATTERN)
+DIM_PATTERN_NxN = r"%s ?x %s" % (UNITS_PATTERN, UNITS_PATTERN)
 
